@@ -1,47 +1,27 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import TitrePrincipale from './components/TitrePrincipale.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div class="app-container">
+    <TitrePrincipale />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+    <main>
+      <div v-if="isLoading" class="container-card flex justify-center items-center p-12">
+        <div
+          class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent-500"
+        ></div>
+      </div>
 
-  <main>
-    <TheWelcome />
-  </main>
+      <div
+        v-else-if="error"
+        class="container-card bg-error-500 bg-opacity-20 text-white p-6 rounded-lg"
+      >
+        <p class="text-center">{{ error }}</p>
+        <div class="flex justify-center mt-4">
+          <button @click="fetchData" class="btn btn-primary">Retry</button>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
