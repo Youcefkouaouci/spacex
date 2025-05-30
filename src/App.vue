@@ -1,5 +1,37 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+
 import TitrePrincipale from './components/TitrePrincipale.vue'
+import NextLaunch from './components/NextLaunch.vue'
+import { Launch } from './types/launch'
+import { fetchLaunches, fetchNextLaunch } from './services/spaceXApi'
+
+const launches = ref<Launch[]>([])
+const nextLaunch = ref<Launch | null>(null)
+const isLoading = ref(true)
+const error = ref<string | null>(null)
+const currentFilter = ref<'all' | 'success' | 'failure'>('all')
+
+const fetchData = async () => {
+  isLoading.value = true
+  error.value = null
+
+  try {
+    // Récupérer le prochain lancement
+    const nextLaunchData = await fetchNextLaunch()
+    nextLaunch.value = nextLaunchData
+
+    // Récupérez au-delà de 10 lancements
+    const launchesData = await fetchLaunches()
+    launches.value = launchesData
+    applyFilter(currentFilter.value)
+  } catch (err) {
+    error.value = 'Failed to fetch SpaceX data. Please try again later.'
+    console.error(err)
+  } finally {
+    isLoading.value = false
+  }
+}
 </script>
 
 <template>
@@ -19,9 +51,14 @@ import TitrePrincipale from './components/TitrePrincipale.vue'
       >
         <p class="text-center">{{ error }}</p>
         <div class="flex justify-center mt-4">
-          <button @click="fetchData" class="btn btn-primary">Retry</button>
+          <button @click="fetchData" class="btn btn-primary">Réessayer</button>
         </div>
       </div>
+
+      <template v-else>
+        <!-- Prochain Lancement Section -->
+        <NextLaunch v-if="nextLaunch" :launch="nextLaunch" />
+      </template>
     </main>
   </div>
 </template>
