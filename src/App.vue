@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import TitrePrincipale from './components/TitrePrincipale.vue'
 import NextLaunch from './components/NextLaunch.vue'
 import LaunchFilter from './components/LaunchFilter.vue'
@@ -11,7 +11,8 @@ import { fetchLaunches, fetchNextLaunch } from './services/spaceXApi'
 const launches = ref<Launch[]>([])
 const filteredLaunches = ref<Launch[]>([])
 const nextLaunch = ref<Launch | null>(null)
-
+const selectedLaunch = ref<Launch | null>(null)
+const isModalOpen = ref(false)
 const isLoading = ref(true)
 const error = ref<string | null>(null)
 const currentFilter = ref<'all' | 'success' | 'failure'>('all')
@@ -48,6 +49,22 @@ const applyFilter = (filter: 'all' | 'success' | 'failure') => {
     filteredLaunches.value = launches.value.filter((launch) => launch.success === false)
   }
 }
+
+const openLaunchModal = (launch: Launch) => {
+  selectedLaunch.value = launch
+  isModalOpen.value = true
+}
+
+const closeLaunchModal = () => {
+  isModalOpen.value = false
+  setTimeout(() => {
+    selectedLaunch.value = null
+  }, 300)
+}
+
+onMounted(() => {
+  fetchData()
+})
 </script>
 
 <template>
@@ -77,7 +94,18 @@ const applyFilter = (filter: 'all' | 'success' | 'failure') => {
 
         <!-- Lancement Filter Section -->
         <LaunchFilter :currentFilter="currentFilter" @filter-change="applyFilter" />
+
+        <!-- List des Lancement Section -->
+        <LaunchList :launches="filteredLaunches" @launch-click="openLaunchModal" />
       </template>
     </main>
+
+    <!-- Lancement Modale section -->
+    <LaunchModal
+      v-if="selectedLaunch"
+      :launch="selectedLaunch"
+      :isOpen="isModalOpen"
+      @close="closeLaunchModal"
+    />
   </div>
 </template>

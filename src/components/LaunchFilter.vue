@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Déclare les propriétés (props) attendues depuis le composant parent.
+// Déclare les propriétés (props) attendues depuis le composant parent
 defineProps<{
   currentFilter: 'all' | 'success' | 'failure'
 }>()
