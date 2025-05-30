@@ -37,3 +37,5 @@ npm run build
 ```sh
 npm run lint
 ```
+
+1 config tailwind css js
