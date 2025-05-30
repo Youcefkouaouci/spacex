@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-
+import { ref } from 'vue'
 import TitrePrincipale from './components/TitrePrincipale.vue'
 import NextLaunch from './components/NextLaunch.vue'
+import LaunchFilter from './components/LaunchFilter.vue'
+import LaunchList from './components/LaunchList.vue'
+import LaunchModal from './components/LaunchModal.vue'
 import { Launch } from './types/launch'
 import { fetchLaunches, fetchNextLaunch } from './services/spaceXApi'
 
 const launches = ref<Launch[]>([])
+const filteredLaunches = ref<Launch[]>([])
 const nextLaunch = ref<Launch | null>(null)
+
 const isLoading = ref(true)
 const error = ref<string | null>(null)
 const currentFilter = ref<'all' | 'success' | 'failure'>('all')
@@ -30,6 +34,18 @@ const fetchData = async () => {
     console.error(err)
   } finally {
     isLoading.value = false
+  }
+}
+
+const applyFilter = (filter: 'all' | 'success' | 'failure') => {
+  currentFilter.value = filter
+
+  if (filter === 'all') {
+    filteredLaunches.value = [...launches.value]
+  } else if (filter === 'success') {
+    filteredLaunches.value = launches.value.filter((launch) => launch.success === true)
+  } else {
+    filteredLaunches.value = launches.value.filter((launch) => launch.success === false)
   }
 }
 </script>
@@ -58,6 +74,9 @@ const fetchData = async () => {
       <template v-else>
         <!-- Prochain Lancement Section -->
         <NextLaunch v-if="nextLaunch" :launch="nextLaunch" />
+
+        <!-- Lancement Filter Section -->
+        <LaunchFilter :currentFilter="currentFilter" @filter-change="applyFilter" />
       </template>
     </main>
   </div>
