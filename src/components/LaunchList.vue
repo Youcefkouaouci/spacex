@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { format } from 'date-fns'
-import { Launch } from '../types/launch'
+import type { Launch } from '../types/launch'
 
 defineProps<{
   launches: Launch[]
@@ -76,6 +76,7 @@ const handleLaunchClick = (launch: Launch) => {
 .line-clamp-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -83,6 +84,7 @@ const handleLaunchClick = (launch: Launch) => {
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

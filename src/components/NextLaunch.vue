@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { format } from 'date-fns'
-import { Launch } from '../types/launch'
+import type { Launch } from '../types/launch'
 
 // Déclaration des props
 const props = defineProps<{
@@ -118,7 +118,14 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-/* .countdown-item {
-  @apply flex flex-col items-center justify-center bg-primary-700 rounded-lg p-3 text-center;
-} */
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-700, #1e293b); /* fallback color */
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  text-align: center;
+}
 </style>

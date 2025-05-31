@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { format } from 'date-fns'
-import { Launch } from '../types/launch'
+import type { Launch } from '../types/launch'
 
 const props = defineProps<{
   launch: Launch
