@@ -23,7 +23,7 @@ const handleLaunchClick = (launch: Launch) => {
   <section class="mt-6">
     <h2 class="text-2xl font-bold mb-4">Liste des Lancements</h2>
 
-    <div v-if="launches.length === 0" class="text-center py-8 bg-primary-800 rounded-lg">
+    <div v-if="launches.length === 0" class="text-center py-8 bg-black rounded-lg">
       <p class="text-gray-400">Aucun lancement trouvé avec le filtre actuel</p>
     </div>
 
@@ -35,7 +35,7 @@ const handleLaunchClick = (launch: Launch) => {
         class="bg-primary-800 rounded-lg overflow-hidden shadow-lg cursor-pointer transform transition-transform duration-200 hover:scale-[1.02] hover:shadow-xl"
       >
         <div
-          class="relative aspect-video bg-primary-700 flex items-center justify-center overflow-hidden"
+          class="relative aspect-video bg-slate-200 flex items-center justify-center overflow-hidden"
         >
           <img
             v-if="launch.links.patch?.small"
@@ -43,7 +43,7 @@ const handleLaunchClick = (launch: Launch) => {
             :alt="`${launch.name} mission patch`"
             class="max-h-24 object-contain"
           />
-          <div v-else class="text-gray-500 text-sm">Pas d'écusson</div>
+          <div v-else class="text-gray-950 text-sm">Pas d'écusson</div>
 
           <div
             class="absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-medium"
@@ -61,7 +61,7 @@ const handleLaunchClick = (launch: Launch) => {
 
         <div class="p-4">
           <h3 class="font-bold text-lg mb-1 line-clamp-1">{{ launch.name }}</h3>
-          <p class="text-gray-400 text-sm mb-2">{{ formatDate(launch.date_utc) }}</p>
+          <p class="text-blue-50 text-sm mb-2">{{ formatDate(launch.date_utc) }}</p>
           <p v-if="launch.details" class="text-gray-300 text-sm line-clamp-2">
             {{ launch.details }}
           </p>

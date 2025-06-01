@@ -24,7 +24,7 @@ const handleFilterChange = (event: Event) => {
         id="launch-filter"
         :value="currentFilter"
         @change="handleFilterChange"
-        class="bg-primary-700 border border-primary-600 rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-accent-500"
+        class="bg-primary-900 border border-primary-600 rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-black"
       >
         <option value="all">Tous les lancements</option>
         <option value="success">Lancements réussis</option>

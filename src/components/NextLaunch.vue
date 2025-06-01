@@ -78,36 +78,36 @@ onUnmounted(() => {
     <h2 class="text-2xl font-bold mb-4 text-center">Prochain Lancement</h2>
 
     <div class="flex flex-col items-center">
-      <h3 class="text-xl md:text-2xl font-semibold mb-2 text-accent-500">
+      <h3 class="text-xl md:text-2xl font-semibold mb-2 text-black">
         {{ launch.name }}
       </h3>
 
-      <p class="text-gray-300 mb-4">Prévu pour le {{ formattedLaunchDate }}</p>
+      <p class="text-gray-700 mb-4">Prévu pour le {{ formattedLaunchDate }}</p>
 
       <div class="grid grid-cols-4 gap-2 md:gap-4 w-full max-w-lg mt-2">
         <div class="countdown-item">
-          <div class="text-2xl md:text-3xl font-bold text-accent-500">
+          <div class="text-2xl md:text-3xl font-bold text-black">
             {{ countdown.days }}
           </div>
           <div class="text-xs uppercase text-gray-400">Jours</div>
         </div>
 
         <div class="countdown-item">
-          <div class="text-2xl md:text-3xl font-bold text-accent-500">
+          <div class="text-2xl md:text-3xl font-bold text-black">
             {{ countdown.hours }}
           </div>
           <div class="text-xs uppercase text-gray-400">Heures</div>
         </div>
 
         <div class="countdown-item">
-          <div class="text-2xl md:text-3xl font-bold text-accent-500">
+          <div class="text-2xl md:text-3xl font-bold text-black">
             {{ countdown.minutes }}
           </div>
           <div class="text-xs uppercase text-gray-400">Minutes</div>
         </div>
 
         <div class="countdown-item">
-          <div class="text-2xl md:text-3xl font-bold text-accent-500">
+          <div class="text-2xl md:text-3xl font-bold text-black">
             {{ countdown.seconds }}
           </div>
           <div class="text-xs uppercase text-gray-400">Secondes</div>
@@ -123,7 +123,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-primary-700, #1e293b); /* fallback color */
+  background-color: var(--color-primary-, #ffffff); /* fallback color */
   border-radius: 0.5rem;
   padding: 0.75rem;
   text-align: center;
